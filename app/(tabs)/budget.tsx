@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { StyleSheet, View, TextInput, Pressable } from "react-native";
+import { StyleSheet, TextInput, Pressable } from "react-native";
+import { router } from "expo-router";
 
 import ParallaxScrollView from "@/components/parallax-scroll-view";
 import { ThemedText } from "@/components/themed-text";
