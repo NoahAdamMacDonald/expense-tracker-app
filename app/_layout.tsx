@@ -19,7 +19,6 @@ export default function RootLayout() {
         <Stack>
           <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
           <Stack.Screen name="add-expense" options={{ title: 'Add Expense' }} />
-          <Stack.Screen name="expense/:id" options={{ title: 'Expense Details' }} />
         </Stack>        
       </ExpensesProvider>
       <StatusBar style="auto" />
