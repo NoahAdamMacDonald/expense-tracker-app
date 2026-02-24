@@ -17,6 +17,7 @@ export default function BudgetScreen() {
     const value = parseFloat(input);
     if (!isNaN(value)) {
       setBudget(value);
+      router.push("/");
     }
   };
 
