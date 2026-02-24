@@ -1,5 +1,6 @@
 import { StyleSheet, View, Pressable } from "react-native";
 import ParallaxScrollView from "@/components/parallax-scroll-view";
+import { router } from "expo-router";
 
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
@@ -53,15 +54,7 @@ export default function HomeScreen() {
       {/* Add Expense Button */}
       <Pressable
         style={styles.addButton}
-        onPress={() => {
-          addExpense({ //TODO: temporary until add expense screen added
-            id: Date.now().toString(),
-            title: "Test Expense",
-            amount: 12.34,
-            category: "Testing",
-            date: new Date().toISOString().split("T")[0],
-          });
-        }}>
+        onPress={() => router.push("/add-expense")}>
         <ThemedText type="defaultSemiBold" style={styles.addButtonText}>
           + Add Expense
         </ThemedText>
