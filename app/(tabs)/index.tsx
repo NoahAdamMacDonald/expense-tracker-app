@@ -8,10 +8,9 @@ import { Colors } from "@/constants/theme";
 import { useExpenses } from "@/context/ExpensesContext";
 
 export default function HomeScreen() {
-  const { expenses, addExpense } = useExpenses();
+  const { expenses, addExpense, budget } = useExpenses();
 
   const total = expenses.reduce((sum, e) => sum + e.amount, 0);
-  const budget = 800; // TODO: Temporary until budget screen added.
   const remaining = budget - total;
 
   return (
