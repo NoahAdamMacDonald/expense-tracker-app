@@ -1,50 +1,27 @@
-# Welcome to your Expo app 👋
+# Noah MacDonald
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+# Simply Budget Expo App
+a basic budgeting app built with expo,
+allows users to create a budget limit and add expenses.
 
-## Get started
+# Start
+1. npm install
+2. Android: npm run android
 
-1. Install dependencies
+# Pages
+1. /tabs/index.tsx  : home screen for app
+2. /tabs/budget.tsx : budgeting screen for app
+3. add-expense.tsx  : expense creation
 
-   ```bash
-   npm install
-   ```
+# components/constants
+1. theme.ts : holds the styling for the app, currently only supports light theme
+2. expensesContext.tsx : holds the expense/budgeting app context and methods for adding expenses and setting budgets.
+3. parallax-scroll-view.tsx : contains the global header and styling for the Simply Budget logo
 
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+# Future Plans
+1. Dark mode support
+2. adding Favicon and custom icons for app brand
+3. Cleaning up old left over code from previous planned stages.
+4. Adding support to edit expenses
+5. Adding support for multiple budgets, budget by category
+6. Add filtering for expense list, currently only lists by most recent

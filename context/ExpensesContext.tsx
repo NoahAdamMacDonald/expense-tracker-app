@@ -7,7 +7,7 @@ const ExpensesContext = createContext<ExpenseContextType | null>(null);
 export function ExpensesProvider({ children }: { children: React.ReactNode }) {
   const [expenses, setExpenses] = useState<Expense[]>([]);
 
-  // NEW: budget state
+  // budget state
   const [budget, setBudget] = useState<number>(800);
 
   // add expense
@@ -27,8 +27,8 @@ export function ExpensesProvider({ children }: { children: React.ReactNode }) {
       expenses,
       addExpense,
       getExpenseById,
-      budget,        // NEW
-      setBudget,     // NEW
+      budget,      
+      setBudget,     
     }),
     [expenses, addExpense, getExpenseById, budget]
   );
