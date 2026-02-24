@@ -1,42 +1,77 @@
-import { Image } from "expo-image";
 import { StyleSheet, View, Pressable } from "react-native";
-import { useState } from "react";
-
 import ParallaxScrollView from "@/components/parallax-scroll-view";
+
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
 import { Colors } from "@/constants/theme";
 
 import { useExpenses } from "@/context/ExpensesContext";
 
-import { Expense } from "@/types/expense";
-
 export default function HomeScreen() {
-  const { expenses } = useExpenses();
+  const { expenses, addExpense } = useExpenses();
 
   const total = expenses.reduce((sum, e) => sum + e.amount, 0);
+  const budget = 800; // TODO: Temporary until budget screen added.
+  const remaining = budget - total;
 
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
-      headerImage={
-        <Image
-          source={require("@/assets/images/partial-react-logo.png")}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.headerContainer}>
-        <ThemedText type="title">Budget Tracker</ThemedText>
-      </ThemedView>
+    <ParallaxScrollView>
+      {/* Screen Title */}
+      <ThemedText type="title" style={styles.screenTitle}>
+        Budget Tracker
+      </ThemedText>
 
+      {/* Summary Card */}
       <ThemedView style={styles.summaryCard}>
-        <ThemedText type="subtitle">Total Spent</ThemedText>
-        <ThemedText type="title">${total.toFixed(2)}</ThemedText>
+        <View style={styles.summaryRow}>
+          <ThemedText type="subtitle" style={styles.summaryLabel}>
+            Total Spent
+          </ThemedText>
+          <ThemedText type="title" style={styles.summaryValue}>
+            ${total.toFixed(2)}
+          </ThemedText>
+        </View>
+
+        <View style={styles.summaryRow}>
+          <ThemedText type="subtitle" style={styles.summaryLabel}>
+            Budget
+          </ThemedText>
+          <ThemedText type="defaultSemiBold" style={styles.summaryValue}>
+            ${budget}
+          </ThemedText>
+        </View>
+
+        <View style={styles.summaryRow}>
+          <ThemedText type="subtitle" style={styles.summaryLabel}>
+            Remaining
+          </ThemedText>
+          <ThemedText type="defaultSemiBold" style={styles.summaryValue}>
+            {remaining >= 0 ? "+" : "-"}${Math.abs(remaining).toFixed(2)}
+          </ThemedText>
+        </View>
       </ThemedView>
 
-      <ThemedView style={styles.sectionHeader}>
-        <ThemedText type="subtitle">Recent Expenses</ThemedText>
-      </ThemedView>
+      {/* Add Expense Button */}
+      <Pressable
+        style={styles.addButton}
+        onPress={() => {
+          addExpense({ //TODO: temporary until add expense screen added
+            id: Date.now().toString(),
+            title: "Test Expense",
+            amount: 12.34,
+            category: "Testing",
+            date: new Date().toISOString().split("T")[0],
+          });
+        }}>
+        <ThemedText type="defaultSemiBold" style={styles.addButtonText}>
+          + Add Expense
+        </ThemedText>
+      </Pressable>
+
+      {/* Recent Expenses */}
+      <ThemedText type="subtitle" style={styles.sectionHeader}>
+        Recent Expenses
+      </ThemedText>
 
       {expenses.map((expense) => (
         <ThemedView key={expense.id} style={styles.expenseItem}>
@@ -51,32 +86,39 @@ export default function HomeScreen() {
           </ThemedText>
         </ThemedView>
       ))}
-
-      <Pressable
-        style={styles.addButton}
-        onPress={() => {
-          
-        }}>
-        <ThemedText type="defaultSemiBold" style={styles.addButtonText}>
-          + Add Expense
-        </ThemedText>
-      </Pressable>
     </ParallaxScrollView>
   );
 }
 
 const styles = StyleSheet.create({
-  headerContainer: {
-    marginBottom: 16,
+  container: {
+    padding: 16,
+    paddingBottom: 40,
+  },
+  screenTitle: {
+    textAlign: "center",
+    marginBottom: 20,
+    fontSize: 22,
   },
   summaryCard: {
+    backgroundColor: Colors.light.cardBackground,
     padding: 16,
-    borderRadius: 12,
-    backgroundColor: Colors.light.tint,
-    marginBottom: 16,
+    borderRadius: 16,
+    marginBottom: 24,
+  },
+  summaryRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginBottom: 8,
+  },
+  summaryLabel: {
+    color: Colors.light.cardText,
+  },
+  summaryValue: {
+    color: Colors.light.cardText,
   },
   sectionHeader: {
-    marginBottom: 8,
+    marginBottom: 12,
   },
   expenseItem: {
     paddingVertical: 12,
@@ -90,18 +132,11 @@ const styles = StyleSheet.create({
   addButton: {
     marginTop: 24,
     paddingVertical: 14,
-    borderRadius: 12,
-    backgroundColor: Colors.light.tint,
+    borderRadius: 16,
+    backgroundColor: Colors.light.buttonBackground,
     alignItems: "center",
   },
   addButtonText: {
-    color: "#fff",
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: "absolute",
+    color: Colors.light.cardText,
   },
 });
